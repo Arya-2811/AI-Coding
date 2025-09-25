@@ -65,3 +65,13 @@ Copy `.env.example` to `.env` and set values if needed:
 ## License
 
 MIT
+
+## Branch: feature/ai-prototype
+
+This branch integrates the AI Coding Practice app with:
+
+- MongoDB persistence for users/problems/progress
+- OpenRouter provider for AI suggestions (fallback to mock)
+- Code editor with language-aware indentation, autocomplete, and Format button
+- Seed script to ensure 50+ mixed-difficulty problems
+

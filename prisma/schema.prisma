@@ -1,0 +1,43 @@
+// Prisma schema for MySQL
+// 1) Set DATABASE_URL in .env, e.g.:
+//    DATABASE_URL="mysql://user:password@localhost:3306/coding_practice"
+// 2) Run: npm run prisma:generate && npm run prisma:migrate
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Difficulty {
+  Easy
+  Medium
+  Hard
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model Problem {
+  id            Int         @id @default(autoincrement())
+  slug          String      @unique
+  title         String
+  difficulty    Difficulty
+  tags          String      // comma-separated tags for simplicity
+  statement     String
+  starterJs     String?
+  starterPy     String?
+  testsJson     Json?       // [{ input: [...], output: ... }, ...]
+  timeLimitMs   Int         @default(2000)
+  createdAt     DateTime    @default(now())
+
+  @@index([difficulty])
+}
